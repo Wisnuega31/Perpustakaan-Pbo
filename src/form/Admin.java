@@ -27,6 +27,7 @@ public class Admin extends javax.swing.JInternalFrame {
         initComponents();
         muatTabel();
     }
+
     private void muatTabel() {
         DefaultTableModel model = (DefaultTableModel) tabel.getModel();
         model.getDataVector().removeAllElements();
@@ -38,25 +39,28 @@ public class Admin extends javax.swing.JInternalFrame {
             while (rs.next()) {
                 Vector baris = new Vector();
                 baris.add(rs.getInt("id"));
+                baris.add(rs.getString("namaLengkap"));
                 baris.add(rs.getString("username"));
                 baris.add(rs.getString("password"));
-                baris.add(rs.getString("namaLengkap"));
                 baris.add(rs.getString("jenis_kelamin"));
                 baris.add(rs.getString("noHp"));
-             
+                baris.add(rs.getString("level"));
+
                 model.addRow(baris);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Kategori.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        public void kosongkan(){
+
+    public void kosongkan() {
         username.setText("");
         nama_lengkap.setText("");
         password.setText("");
         no_hp.setText("");
-       buttonGroup1.clearSelection();
-        
+        buttonGroup1.clearSelection();
+        level.setSelectedItem("Admin");
+
         simpan.setEnabled(true);
         ubah.setEnabled(false);
         hapus.setEnabled(false);
@@ -88,13 +92,15 @@ public class Admin extends javax.swing.JInternalFrame {
         batal = new javax.swing.JButton();
         laki_laki = new javax.swing.JRadioButton();
         perempuan = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
+        level = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Username");
@@ -148,38 +154,45 @@ public class Admin extends javax.swing.JInternalFrame {
         buttonGroup1.add(perempuan);
         perempuan.setText("Perempuan");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel6.setText("Level");
+
+        level.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Petugas" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(simpan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(simpan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5))
+                            .addGap(28, 28, 28)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(nama_lengkap)
                                 .addComponent(username)
                                 .addComponent(password)
-                                .addComponent(no_hp, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(laki_laki)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(perempuan))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ubah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(batal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(no_hp, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(laki_laki)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(perempuan))
+                                .addComponent(level, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(ubah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
+                            .addComponent(batal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel6))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -206,27 +219,31 @@ public class Admin extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(no_hp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(simpan)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ubah)
                     .addComponent(batal)
                     .addComponent(hapus))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "Nama Lengkap", "Username", "Password", "Jenis Kelamin", "No Hp"
+                "id", "Nama Lengkap", "Username", "Password", "Jenis Kelamin", "No Hp", "Level"
             }
         ));
         tabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -242,7 +259,7 @@ public class Admin extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -291,13 +308,13 @@ public class Admin extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -305,17 +322,21 @@ public class Admin extends javax.swing.JInternalFrame {
 
     private void simpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simpanMouseClicked
         // TODO add your handling code here:
-        String gender = "";
-        if (laki_laki.isSelected()) {
-            gender = "L";
+        if (username.getText().equals("") || password.getText().equals("") || nama_lengkap.getText().equals("") || no_hp.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Input tidak boleh kosong");
+        } else { 
+            String gender = "";
+            if (laki_laki.isSelected()) {
+                gender = "L";
+            }
+            if (perempuan.isSelected()) {
+                gender = "P";
+            }
+            String sql = "insert into admin(username,password,namaLengkap,jenis_kelamin,noHp,level) value('" + username.getText() + "','" + password.getText() + "','" + nama_lengkap.getText() + "','" + gender + "','" + no_hp.getText() + "','"+level.getSelectedItem()+"')";
+            koneksiDb.ubahData(sql);
+            muatTabel();
+            kosongkan();
         }
-        if(perempuan.isSelected()){
-            gender = "P";
-        }
-        String sql = "insert into admin(username,password,namaLengkap,jenis_kelamin,noHp) value('"+username.getText()+"','"+password.getText()+"','"+nama_lengkap.getText()+"','"+gender+"','"+no_hp.getText()+"')";
-        koneksiDb.ubahData(sql);
-        muatTabel();
-        kosongkan();
     }//GEN-LAST:event_simpanMouseClicked
 
     private void tabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMouseClicked
@@ -325,14 +346,15 @@ public class Admin extends javax.swing.JInternalFrame {
         username.setText(tabel.getValueAt(baris, 2).toString());
         password.setText(tabel.getValueAt(baris, 3).toString());
         no_hp.setText(tabel.getValueAt(baris, 5).toString());
-        
+        level.setSelectedItem(tabel.getValueAt(baris, 6).toString());
+
         if (tabel.getValueAt(baris, 4).equals("L")) {
-           laki_laki.setSelected(true);
+            laki_laki.setSelected(true);
         }
-        if(tabel.getValueAt(baris, 4).equals("P")){
-           perempuan.setSelected(true);
+        if (tabel.getValueAt(baris, 4).equals("P")) {
+            perempuan.setSelected(true);
         }
-        
+
         simpan.setEnabled(false);
         ubah.setEnabled(true);
         hapus.setEnabled(true);
@@ -342,20 +364,20 @@ public class Admin extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String gender = "";
         if (laki_laki.isSelected()) {
-           gender = "L";
+            gender = "L";
         }
-        if(perempuan.isSelected()){
-           gender = "P";
+        if (perempuan.isSelected()) {
+            gender = "P";
         }
-        
+
         int row = tabel.getSelectedRow();
-        String sql = "update admin set username = '"+username.getText()+"', password = '"+password.getText()+"', namaLengkap = '"+nama_lengkap.getText()+"', jenis_kelamin = '"+gender+"', noHp = '"+no_hp.getText()+"' where id = "+tabel.getValueAt(row, 0);
-        
+        String sql = "update admin set username = '" + username.getText() + "', password = '" + password.getText() + "', namaLengkap = '" + nama_lengkap.getText() + "', jenis_kelamin = '" + gender + "', noHp = '" + no_hp.getText() + "', level = '"+level.getSelectedItem()+"' where id = " + tabel.getValueAt(row, 0);
+
         if (koneksiDb.ubahData(sql)) {
             JOptionPane.showMessageDialog(null, "Data admin berhasil diupdate");
             muatTabel();
             kosongkan();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Data admin gagal diupdate");
             kosongkan();
         }
@@ -365,13 +387,13 @@ public class Admin extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tabel.getModel();
         int row = tabel.getSelectedRow();
-        String sql = "delete from admin where id = "+tabel.getValueAt(row, 0);
-        
+        String sql = "delete from admin where id = " + tabel.getValueAt(row, 0);
+
         if (koneksiDb.ubahData(sql)) {
             JOptionPane.showMessageDialog(null, "Data admin berhasil dihapus");
             model.removeRow(row);
             kosongkan();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Data admin gagal dihapus");
             kosongkan();
         }
@@ -387,12 +409,14 @@ public class Admin extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton laki_laki;
+    private javax.swing.JComboBox<String> level;
     private javax.swing.JTextField nama_lengkap;
     private javax.swing.JTextField no_hp;
     private javax.swing.JTextField password;

@@ -10,6 +10,11 @@ package form;
  * @author LAB 1_10
  */
 public class FormUtama extends javax.swing.JFrame {
+    Buku buku = new Buku();
+    Kategori kategori = new Kategori();
+    Admin admin = new Admin();
+    Member member = new Member();
+    Peminjaman peminjaman = new Peminjaman();
 
     /**
      * Creates new form FormUtama
@@ -31,7 +36,6 @@ public class FormUtama extends javax.swing.JFrame {
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         nama_admin = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
@@ -41,14 +45,6 @@ public class FormUtama extends javax.swing.JFrame {
 
         nama_admin.setText("Nama_admin");
         menuBar.add(nama_admin);
-
-        jMenu2.setText("Peminjaman");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
-            }
-        });
-        menuBar.add(jMenu2);
 
         jMenu3.setText("Member");
         jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -96,42 +92,48 @@ public class FormUtama extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
         // TODO add your handling code here:
-        Kategori member = new Kategori();
-        desktopPane.add(member);
-        member.setVisible(true);
+        desktopPane.add(kategori);
+        kategori.setVisible(true);
+        buku.setVisible(false);
+        admin.setVisible(false);
+        member.setVisible(false);
+//        peminjaman.setVisible(false);
     }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
         // TODO add your handling code here:
-        Buku bk = new Buku();
-        desktopPane.add(bk);
-        bk.setVisible(true);
+        desktopPane.add(buku);
+        buku.setVisible(true);
+        kategori.setVisible(false);
+        admin.setVisible(false);
+        member.setVisible(false);
+//        peminjaman.setVisible(false);
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
         // TODO add your handling code here:
-        Admin adm = new Admin();
-        desktopPane.add(adm);
-        adm.setVisible(true);
+        desktopPane.add(admin);
+        admin.setVisible(true);
+        buku.setVisible(false);
+        kategori.setVisible(false);
+        member.setVisible(false);
+//        peminjaman.setVisible(false);
     }//GEN-LAST:event_jMenu4MouseClicked
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
         // TODO add your handling code here:
-        Member mb = new Member();
-        desktopPane.add(mb);
-        mb.setVisible(true);
+        desktopPane.add(member);
+        member.setVisible(true);
+        buku.setVisible(false);
+        admin.setVisible(false);
+        kategori.setVisible(false);
+//        peminjaman.setVisible(false);
     }//GEN-LAST:event_jMenu3MouseClicked
-
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-        // TODO add your handling code here:
-        Peminjaman pm = new Peminjaman();
-        desktopPane.add(pm);
-        pm.setVisible(true);
-    }//GEN-LAST:event_jMenu2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -170,7 +172,6 @@ public class FormUtama extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;

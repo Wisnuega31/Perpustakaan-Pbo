@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import lib.koneksiDb;
 
 /**
@@ -131,6 +132,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
@@ -144,16 +146,22 @@ public class Login extends javax.swing.JFrame {
     private void simpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simpanMouseClicked
         try {
             // TODO add your handling code here:
-            String sql = "select * from admin where username = '"+username.getText()+"' and password = '"+password.getText()+"'";
-            koneksiDb db  = new koneksiDb();
+            String sql = "select * from admin where username = '" + username.getText() + "' and password = '" + password.getText() + "'";
+            koneksiDb db = new koneksiDb();
             ResultSet rs = koneksiDb.ambilData(sql);
-            
+
             if (rs.next()) {
-                lib.Admin.setUsername(rs.getString("username"));
-                
-                new FormUtama().setVisible(true);
-               this.setVisible(false);
-                
+                if (rs.getString("level").equals("Admin")) {
+                    lib.Admin.setUsername(rs.getString("username"));
+                    new FormUtama().setVisible(true);
+                    this.setVisible(false);
+                }else{
+                    lib.Admin.setUsername(rs.getString("username"));
+                    new FormPetugas().setVisible(true);
+                    this.setVisible(false);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Username dan Password tidak valid!!");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

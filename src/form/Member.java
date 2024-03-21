@@ -316,10 +316,15 @@ public class Member extends javax.swing.JInternalFrame {
 
     private void simpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simpanMouseClicked
         // TODO add your handling code here:
+        if (nama_lengkap.getText().equals("") || alamat.getText().equals("") || tanggal.equals("") || no_hp.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Input tidak boleh kosong");
+        }else{
         String sql = "insert into member(namaLengkap,alamat,tanggalLahir,noHp) value('" + nama_lengkap.getText() + "','" + alamat.getText() + "','" + tanggal + "','" + no_hp.getText() + "')";
         koneksiDb.ubahData(sql);
+        JOptionPane.showMessageDialog(null, "Member berhasil ditambahkan");
         muatTabel();
         kosongkan();
+        }
     }//GEN-LAST:event_simpanMouseClicked
 
     private void tanggal_lahirPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tanggal_lahirPropertyChange

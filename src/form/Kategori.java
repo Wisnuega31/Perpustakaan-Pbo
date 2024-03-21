@@ -222,10 +222,15 @@ public class Kategori extends javax.swing.JInternalFrame {
 
     private void simpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simpanMouseClicked
         // TODO add your handling code here:
+        if (nama_kategori.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Input tidak boleh kosong");
+        }else{
         String sql = "insert into koleksi(namaKategori) value('"+nama_kategori.getText()+"')";
         koneksiDb.ubahData(sql);
+        JOptionPane.showMessageDialog(null, "Kategori Berhasil di tambahkan");
         muatTabel();
         kosongkan();
+        }
     }//GEN-LAST:event_simpanMouseClicked
 
     private void tabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMouseClicked

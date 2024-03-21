@@ -343,12 +343,15 @@ public class Buku extends javax.swing.JInternalFrame {
 
     private void simpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simpanMouseClicked
         // TODO add your handling code here:
-//        JOptionPane.showMessageDialog(null, tahun_terbit.getYear());
-        String[] ktg = kategori.getSelectedItem().toString().split("-", 2);
-        String sql = "insert into buku(judul,penulis,penerbit,tahunTerbit,stok,kategori_id) value('" + judul.getText() + "','" + penulis.getText() + "','" + penerbit.getText() + "','" + tahun_terbit.getYear() + "','" + stok.getText() + "'," + ktg[0] + ")";
-        koneksiDb.ubahData(sql);
-        muatTabel();
-        kosongkan();
+        if (judul.getText().equals("") || penulis.getText().equals("") || penerbit.getText().equals("") || stok.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Input tidak boleh kosong");
+        } else {
+            String[] ktg = kategori.getSelectedItem().toString().split("-", 2);
+            String sql = "insert into buku(judul,penulis,penerbit,tahunTerbit,stok,kategori_id) value('" + judul.getText() + "','" + penulis.getText() + "','" + penerbit.getText() + "','" + tahun_terbit.getYear() + "','" + stok.getText() + "'," + ktg[0] + ")";
+            koneksiDb.ubahData(sql);
+            muatTabel();
+            kosongkan();
+        }
     }//GEN-LAST:event_simpanMouseClicked
 
     private void tabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMouseClicked
@@ -380,7 +383,7 @@ public class Buku extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String[] ktg = kategori.getSelectedItem().toString().split("-", 2);
         int row = tabel.getSelectedRow();
-        String sql = "update buku set judul = '" + judul.getText() + "', penulis = '" + penulis.getText() + "', penerbit = '" + penerbit.getText() + "', tahunTerbit = "+tahun_terbit.getYear()+", stok = "+stok.getText()+", kategori_id= "+ktg[0]+" where id = " + tabel.getValueAt(row, 0);
+        String sql = "update buku set judul = '" + judul.getText() + "', penulis = '" + penulis.getText() + "', penerbit = '" + penerbit.getText() + "', tahunTerbit = " + tahun_terbit.getYear() + ", stok = " + stok.getText() + ", kategori_id= " + ktg[0] + " where id = " + tabel.getValueAt(row, 0);
 
         if (koneksiDb.ubahData(sql)) {
             JOptionPane.showMessageDialog(null, "Data buku berhasil diupdate");
